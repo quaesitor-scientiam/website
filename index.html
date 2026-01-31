@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientiam.AI - Data Science & Machine Learning Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A2540;
+            --accent: #00D4FF;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --bg: #ffffff;
+            --bg-alt: #f8fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, #001529 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px);
+            animation: gridPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 2rem);
+            color: #fff;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 0;
+            background: var(--bg-alt);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .credential-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .credential-text {
+            flex: 1;
+        }
+
+        .credential-text h4 {
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .credential-text p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #001529 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 212, 255, 0.05) 10px, rgba(0, 212, 255, 0.05) 20px);
+        }
+
+        .stat {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: 900;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 0;
+            background: var(--bg-alt);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .contact p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-method {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-method h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .contact-method a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>SCIENTIAM.AI</h1>
+                <div class="subtitle">Data Science & Machine Learning Solutions</div>
+                <p class="tagline">
+                    Transforming complex data challenges into actionable intelligence with advanced ML models, 
+                    computer vision, and automated data pipelines.
+                </p>
+                <a href="#contact" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Services</h2>
+                <p>Expert solutions tailored to your data challenges</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🤖</div>
+                    <h3>Machine Learning</h3>
+                    <p>Custom ML models with proven high-90s accuracy. From predictive analytics to deep learning implementations using TensorFlow, PyTorch, and Scikit-Learn.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">👁️</div>
+                    <h3>Computer Vision</h3>
+                    <p>Advanced image processing and object detection using OpenCV and CUDA. Real-time video analysis with 90%+ performance optimization.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Data Automation</h3>
+                    <p>Automated data extraction and processing pipelines. Transform manual processes into scalable cloud-based solutions on AWS and Azure.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📊</div>
+                    <h3>Data Visualization</h3>
+                    <p>Interactive dashboards and visual analytics using Tableau, Dash, and D3.js. Turn complex data into clear business insights.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🧠</div>
+                    <h3>NLP & Text Analysis</h3>
+                    <p>Natural language processing and semantic analysis. Extract meaning and insights from unstructured text data.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">☁️</div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable data infrastructure on AWS and Azure. Migration, deployment, and optimization of data systems in the cloud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>Expertise That Delivers Results</h2>
+                    <p>
+                        With a Master's degree in Data Science from the University of Illinois and over 15 years 
+                        of software development experience, I bring proven expertise in machine learning, 
+                        computer vision, and data engineering.
+                    </p>
+                    <p>
+                        My track record includes delivering ML models with high-90s accuracy, achieving 90%+ 
+                        performance improvements in production systems, and building automated data pipelines 
+                        that process thousands of records efficiently.
+                    </p>
+                </div>
+                <div class="credentials fade-in">
+                    <div class="credential-item">
+                        <div class="credential-icon">✓</div>
+                        <div class="credential-text">
+                            <h4>Education</h4>
+                            <p>Master's in Data Science, University of Illinois Urbana-Champaign<br>
+                            Nanodegrees: Deep Learning, AI, Computer Vision (Udacity)</p>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">✓</div>
+                        <div class="credential-text">
+                            <h4>Technical Stack</h4>
+                            <p>Python, R, Java, C/C++, TensorFlow, PyTorch, OpenCV, Scikit-Learn, AWS, Azure</p>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">✓</div>
+                        <div class="credential-text">
+                            <h4>Experience</h4>
+                            <p>15+ years in software development and data science across multiple industries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats fade-in" style="margin-top: 4rem;">
+                <div class="stat">
+                    <span class="stat-number">90%+</span>
+                    <span class="stat-label">Performance Improvements</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">High 90s%</span>
+                    <span class="stat-label">Model Accuracy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Let's Work Together</h2>
+                <p>Ready to transform your data challenges into solutions? Get in touch to discuss your project.</p>
+                <div class="contact-methods">
+                    <div class="contact-method fade-in">
+                        <h4>Email</h4>
+                        <a href="mailto:Richard_Wheeler@rjew.info">Richard_Wheeler@rjew.info</a>
+                    </div>
+                    <div class="contact-method fade-in">
+                        <h4>Phone</h4>
+                        <a href="tel:513-295-6208">513-295-6208</a>
+                    </div>
+                    <div class="contact-method fade-in">
+                        <h4>Location</h4>
+                        <p style="color: var(--primary); font-weight: 600; margin: 0;">Hamilton, OH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Scientiam.AI LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
