@@ -386,6 +386,42 @@
             margin: 0;
         }
 
+        .languages {
+            margin-top: 3rem;
+        }
+
+        .languages h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .language-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, #001529 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .language-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -633,7 +669,7 @@
                         <div class="credential-icon">✓</div>
                         <div class="credential-text">
                             <h4>Technical Stack</h4>
-                            <p>Python, R, Java, C/C++, TensorFlow, PyTorch, OpenCV, Scikit-Learn, AWS, Azure</p>
+                            <p>Python, R, V Language, Java, C/C++, TensorFlow, PyTorch, OpenCV, Scikit-Learn, AWS, Azure</p>
                         </div>
                     </div>
                     <div class="credential-item">
@@ -641,6 +677,26 @@
                         <div class="credential-text">
                             <h4>Experience</h4>
                             <p>15+ years in software development and data science across multiple industries</p>
+                        </div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon">✓</div>
+                        <div class="credential-text">
+                            <h4>Open Source</h4>
+                            <p>Active contributor to V language ecosystem | GitHub: quaesitor-scientiam</p>
+                        </div>
+                    </div>
+                    <div class="languages fade-in">
+                        <h3>Programming Languages</h3>
+                        <div class="language-grid">
+                            <div class="language-badge">Python</div>
+                            <div class="language-badge">R</div>
+                            <div class="language-badge">Java</div>
+                            <div class="language-badge">C</div>
+                            <div class="language-badge">C++</div>
+                            <div class="language-badge">C#</div>
+                            <div class="language-badge">V</div>
+                            <div class="language-badge">JavaScript</div>
                         </div>
                     </div>
                 </div>
@@ -679,7 +735,7 @@
                     </div>
                     <div class="contact-method fade-in">
                         <h4>Location</h4>
-                        <p style="color: var(--primary); font-weight: 600; margin: 0;">Hamilton, OH</p>
+                        <p style="color: var(--primary); font-weight: 600; margin: 0;">Fairfield Township, OH</p>
                     </div>
                 </div>
             </div>
