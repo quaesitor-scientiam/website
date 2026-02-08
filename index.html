@@ -478,6 +478,155 @@
             font-size: 0.95rem;
         }
 
+        /* Testimonials Section */
+        .testimonials {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #001529 100%);
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: 70px;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 212, 255, 0.03) 2px, rgba(0, 212, 255, 0.03) 4px);
+            opacity: 0.4;
+        }
+
+        .testimonials .section-header h2 {
+            color: var(--accent);
+        }
+
+        .testimonials .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonial-card {
+            max-width: 780px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.15);
+            border-radius: 8px;
+            padding: 3rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 12px;
+            left: 24px;
+            font-size: 5rem;
+            line-height: 1;
+            color: rgba(0, 212, 255, 0.15);
+            font-family: Georgia, 'Times New Roman', serif;
+            pointer-events: none;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-stars span {
+            color: #f5a623;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .testimonial-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .testimonial-author-info h4 {
+            margin: 0 0 2px 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .testimonial-author-info .author-title {
+            margin: 0 0 4px 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonial-author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .testimonial-author-info a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .testimonial-author-info a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+
+        .testimonial-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.03em;
+        }
+
+        .testimonial-badge::before {
+            content: '✓';
+            font-weight: 700;
+        }
+
         /* Contact Section */
         .contact {
             padding: 8rem 0;
@@ -568,6 +717,26 @@
             .contact-methods {
                 grid-template-columns: 1fr;
             }
+
+            .testimonial-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .testimonial-card::before {
+                font-size: 3.5rem;
+                top: 8px;
+                left: 12px;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+            }
+
+            .testimonial-author {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
         }
 
         /* Scroll animations */
@@ -592,6 +761,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -728,6 +898,43 @@
                 <div class="stat">
                     <span class="stat-number">High 90s%</span>
                     <span class="stat-label">Model Accuracy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Reviews Section -->
+    <section class="testimonials" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Reviews</h2>
+                <p>Trusted by businesses to deliver real results</p>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+
+                <p class="testimonial-text">
+                    Scientiam.AI has been our go-to for automating product data across multiple
+                    distributor sources. They built our Turn 14 Distribution API integration
+                    and automated our Parts Unlimited pipelines — catalog downloads, fitment
+                    data extraction, and image-hash change detection across 500+ brands and
+                    170,000+ parts. They handle everything from distributed processing and
+                    rate-limit workarounds to ongoing data refreshes and exception reporting.
+                    Two years in and the scope keeps growing because the results are always
+                    solid.
+                </p>
+
+                <div class="testimonial-author">
+                    <div class="testimonial-logo">58</div>
+                    <div class="testimonial-author-info">
+                        <h4>Jayson Moss</h4>
+                        <p class="author-title">Owner, 58cycle Parts &amp; Accessories</p>
+                        <p>Motorcycle &amp; Powersports Parts — <a href="https://store.58cycle.com" target="_blank" rel="noopener">store.58cycle.com</a></p>
+                        <span class="testimonial-badge">Verified Business Client &middot; Since 2023</span>
+                    </div>
                 </div>
             </div>
         </div>
