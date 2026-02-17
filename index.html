@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientiam.AI - Data Science & Machine Learning Solutions</title>
+    <title>Scientiam.AI - Data Science & AI Development</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -11,6 +11,7 @@
         :root {
             --primary: #0A2540;
             --accent: #00D4FF;
+            --vibe-purple: #bd00ff; /* New accent for Vibe Coding */
             --text: #1a1a1a;
             --text-light: #666;
             --bg: #ffffff;
@@ -296,6 +297,36 @@
             border-color: var(--accent);
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Vibe Coding / Special Card Styles */
+        .service-card.vibe-mode {
+            background: linear-gradient(165deg, #ffffff 0%, #f6faff 100%);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .service-card.vibe-mode::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(189, 0, 255, 0.05) 0%, transparent 70%);
+            animation: vibePulse 10s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes vibePulse {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .service-card.vibe-mode h3 {
+            background: -webkit-linear-gradient(45deg, var(--primary), var(--vibe-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .service-icon {
@@ -772,10 +803,10 @@
         <div class="container">
             <div class="hero-content">
                 <h1>SCIENTIAM.AI</h1>
-                <div class="subtitle">Data Science & Machine Learning Solutions</div>
+                <div class="subtitle">Data Science & Rapid Development</div>
                 <p class="tagline">
                     Transforming complex data challenges into actionable intelligence with advanced ML models, 
-                    computer vision, and automated data pipelines.
+                    and building next-gen applications at 10x speed using AI-augmented workflows.
                 </p>
                 <a href="#contact" class="cta-button">Get Started</a>
             </div>
@@ -790,6 +821,23 @@
                 <p>Expert solutions tailored to your data challenges</p>
             </div>
             <div class="services-grid">
+                
+                <!-- NEW VIBE CODING SERVICE CARD -->
+                <div class="service-card vibe-mode fade-in">
+                    <div class="service-icon">⚡</div>
+                    <h3>Rapid AI Development</h3>
+                    <p>
+                        <strong>"Vibe Coding" Methodology.</strong> We don't just write code; we curate it. 
+                        Using advanced LLMs as force-multipliers, we prototype, iterate, and deploy 
+                        full-stack web applications at unprecedented speed.
+                    </p>
+                    <ul style="margin-top: 1rem; list-style: none; color: var(--text-light); font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">✨ <strong>Fast Prototyping:</strong> Concept to deployed app in days.</li>
+                        <li style="margin-bottom: 0.5rem;">🌊 <strong>Fluid UI/UX:</strong> Interfaces that feel organic.</li>
+                        <li>🚀 <strong>Modern Stack:</strong> V, Go, & Optimized Python.</li>
+                    </ul>
+                </div>
+
                 <div class="service-card fade-in">
                     <div class="service-icon">🤖</div>
                     <h3>Machine Learning</h3>
@@ -811,11 +859,6 @@
                     <p>Interactive dashboards and visual analytics using Tableau, Dash, and D3.js. Turn complex data into clear business insights.</p>
                 </div>
                 <div class="service-card fade-in">
-                    <div class="service-icon">🧠</div>
-                    <h3>NLP & Text Analysis</h3>
-                    <p>Natural language processing and semantic analysis. Extract meaning and insights from unstructured text data.</p>
-                </div>
-                <div class="service-card fade-in">
                     <div class="service-icon">☁️</div>
                     <h3>Cloud Solutions</h3>
                     <p>Scalable data infrastructure on AWS and Azure. Migration, deployment, and optimization of data systems in the cloud.</p>
@@ -833,12 +876,12 @@
                     <p>
                         With a Master's degree in Data Science from the University of Illinois and over 15 years 
                         of software development experience, I bring proven expertise in machine learning, 
-                        computer vision, and data engineering.
+                        computer vision, and modern data engineering.
                     </p>
                     <p>
-                        My track record includes delivering ML models with high-90s accuracy, achieving 90%+ 
-                        performance improvements in production systems, and building automated data pipelines 
-                        that process thousands of records efficiently.
+                        I embrace an <strong>AI-First</strong> approach to development. By leveraging cutting-edge 
+                        generative AI tools, I deliver production-grade software faster and more reliably than 
+                        traditional methods allow.
                     </p>
                 </div>
                 <div class="credentials fade-in">
@@ -850,25 +893,28 @@
                             Nanodegrees: Deep Learning, AI, Computer Vision (Udacity)</p>
                         </div>
                     </div>
+                    
+                    <!-- UPDATED TECH STACK -->
                     <div class="credential-item">
                         <div class="credential-icon">✓</div>
                         <div class="credential-text">
-                            <h4>Technical Stack</h4>
-                            <p><a href="https://vlang.io/" target="_blank" rel="noopener">V Language</a> | Other: <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a>, <a href="https://www.r-project.org/" target="_blank" rel="noopener">R</a>, <a href="https://www.java.com/" target="_blank" rel="noopener">Java</a>, <a href="https://isocpp.org/" target="_blank" rel="noopener">C/C++</a> | TensorFlow, PyTorch, OpenCV, Scikit-Learn, AWS, Azure</p>
+                            <h4>Technical Stack & Tooling</h4>
+                            <p style="margin-bottom: 4px;">
+                                <span style="color: var(--accent); font-weight: 600;">AI-Augmented:</span> 
+                                Cursor, GitHub Copilot, Claude 3.5 Sonnet, GPT-4o
+                            </p>
+                            <p>
+                                <span style="color: var(--primary); font-weight: 600;">Core:</span> 
+                                <a href="https://vlang.io/" target="_blank" rel="noopener">V Language</a>, Python, TypeScript, Docker, Kubernetes
+                            </p>
                         </div>
                     </div>
+
                     <div class="credential-item">
                         <div class="credential-icon">✓</div>
                         <div class="credential-text">
                             <h4>Experience</h4>
                             <p>15+ years in software development and data science across multiple industries</p>
-                        </div>
-                    </div>
-                    <div class="credential-item">
-                        <div class="credential-icon">✓</div>
-                        <div class="credential-text">
-                            <h4>Open Source</h4>
-                            <p>Active contributor to V language ecosystem | GitHub: quaesitor-scientiam</p>
                         </div>
                     </div>
                     <div class="languages fade-in">
@@ -877,19 +923,19 @@
                             <div class="language-badge">Python</div>
                             <div class="language-badge">R</div>
                             <div class="language-badge">Java</div>
-                            <div class="language-badge">C</div>
-                            <div class="language-badge">C++</div>
-                            <div class="language-badge">C#</div>
                             <div class="language-badge">V</div>
-                            <div class="language-badge">JavaScript</div>
+                            <div class="language-badge">C++</div>
+                            <div class="language-badge">TypeScript</div>
+                            <div class="language-badge">Go</div>
+                            <div class="language-badge">SQL</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="stats fade-in" style="margin-top: 4rem;">
                 <div class="stat">
-                    <span class="stat-number">90%+</span>
-                    <span class="stat-label">Performance Improvements</span>
+                    <span class="stat-number">10x</span>
+                    <span class="stat-label">Dev Velocity</span>
                 </div>
                 <div class="stat">
                     <span class="stat-number">15+</span>
@@ -920,10 +966,7 @@
                     Scientiam.AI has been our go-to for automating product data across multiple
                     distributor sources. They built our Turn 14 Distribution API integration
                     and automated our Parts Unlimited pipelines — catalog downloads, fitment
-                    data extraction, and image-hash change detection across 500+ brands and
-                    170,000+ parts. They handle everything from distributed processing and
-                    rate-limit workarounds to ongoing data refreshes and exception reporting.
-                    Two years in and the scope keeps growing because the results are always
+                    data extraction, and image-hash change detection. Two years in and the scope keeps growing because the results are always
                     solid.
                 </p>
 
@@ -1040,3 +1083,5 @@
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
     </script>
+</body>
+</html>
