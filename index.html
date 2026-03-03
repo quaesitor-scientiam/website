@@ -470,7 +470,7 @@
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             padding: 3rem;
             background: linear-gradient(135deg, var(--primary) 0%, #001529 100%);
@@ -722,6 +722,69 @@
             text-decoration: underline;
         }
 
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            text-align: left;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Work Sans', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--bg);
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         footer {
             background: var(--primary);
@@ -805,8 +868,8 @@
                 <h1>SCIENTIAM.AI</h1>
                 <div class="subtitle">Data Science & Rapid Development</div>
                 <p class="tagline">
-                    Transforming complex data challenges into actionable intelligence with advanced ML models, 
-                    and building next-gen applications at 10x speed using AI-augmented workflows.
+                    I help businesses cut operational overhead and make better decisions with custom ML pipelines,
+                    computer vision, and automated data systems — delivered in weeks, not quarters.
                 </p>
                 <a href="#contact" class="cta-button">Get Started</a>
             </div>
@@ -825,10 +888,9 @@
                 <!-- NEW VIBE CODING SERVICE CARD -->
                 <div class="service-card vibe-mode fade-in">
                     <div class="service-icon">⚡</div>
-                    <h3>Rapid AI Development</h3>
+                    <h3>AI-Accelerated Development</h3>
                     <p>
-                        <strong>"Vibe Coding" Methodology.</strong> We don't just write code; we curate it. 
-                        Using advanced LLMs as force-multipliers, we prototype, iterate, and deploy 
+                        Using advanced LLMs as force-multipliers, I prototype, iterate, and deploy
                         full-stack web applications at unprecedented speed.
                     </p>
                     <ul style="margin-top: 1rem; list-style: none; color: var(--text-light); font-size: 0.9rem;">
@@ -982,6 +1044,21 @@
             <div class="contact-content">
                 <h2>Let's Work Together</h2>
                 <p>Ready to transform your data challenges into solutions? Get in touch to discuss your project.</p>
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Project details</label>
+                        <textarea id="contact-message" name="message" placeholder="Describe your project or question…" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
                 <div class="contact-methods">
                     <div class="contact-method fade-in">
                         <h4>Email</h4>
