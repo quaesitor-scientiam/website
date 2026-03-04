@@ -1151,6 +1151,32 @@
             }, observerOptions);
 
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Clear contact form after successful Formspree submission
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = this;
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    }).then(response => {
+                        if (response.ok) {
+                            form.reset();
+                            const btn = form.querySelector('button[type="submit"]');
+                            const original = btn.textContent;
+                            btn.textContent = 'Message sent!';
+                            btn.disabled = true;
+                            setTimeout(() => {
+                                btn.textContent = original;
+                                btn.disabled = false;
+                            }, 3000);
+                        }
+                    });
+                });
+            }
         });
     </script>
 </body>
