@@ -685,6 +685,54 @@
             margin-bottom: 3rem;
         }
 
+        /* Blog Section */
+        .blog {
+            padding: 8rem 0;
+            background: var(--bg);
+            scroll-margin-top: 70px;
+        }
+
+        .blog h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .blog > .container > p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .blog-coming-soon {
+            max-width: 700px;
+            margin: 2.5rem auto 0;
+            padding: 2.5rem;
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .blog-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .blog-topic {
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
         .contact-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -854,6 +902,7 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#services">Services</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -919,6 +968,23 @@
                     <div class="service-icon">📊</div>
                     <h3>Data Visualization</h3>
                     <p>Interactive dashboards and visual analytics using Tableau, Dash, and D3.js. Turn complex data into clear business insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="fade-in">Blog</h2>
+            <p class="fade-in">Practical guides on data engineering, automation, and AI development. Coming soon.</p>
+            <div class="blog-coming-soon fade-in">
+                <div class="blog-topics">
+                    <span class="blog-topic">Data Pipelines</span>
+                    <span class="blog-topic">Python Automation</span>
+                    <span class="blog-topic">AI Integration</span>
+                    <span class="blog-topic">Computer Vision</span>
+                    <span class="blog-topic">Vibe Coding</span>
                 </div>
             </div>
         </div>
