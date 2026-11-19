@@ -1,0 +1,182 @@
+:root {
+    --primary: #0A2540;
+    --accent: #00D4FF;
+    --text: #1a1a1a;
+    --text-light: #666;
+    --bg: #ffffff;
+    --bg-alt: #f8fafb;
+    --rule: #e3e8ee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+}
+
+nav {
+    background: var(--primary);
+    padding: 1rem 0;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.nav-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.nav-back {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.nav-back:hover {
+    text-decoration: underline;
+}
+
+article {
+    padding: 3.5rem 0 4rem;
+}
+
+article h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-wrap: balance;
+}
+
+.post-meta {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+article h2 {
+    font-size: 1.35rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin: 2.5rem 0 0.75rem;
+}
+
+article p,
+article ul,
+article ol {
+    font-size: 1.075rem;
+    margin-bottom: 1.15rem;
+}
+
+article ul,
+article ol {
+    padding-left: 1.4rem;
+}
+
+article li {
+    margin-bottom: 0.4rem;
+}
+
+article a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+article code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.92em;
+    background: var(--bg-alt);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+}
+
+article pre {
+    background: var(--primary);
+    color: #e8f1f8;
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+article pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.9rem;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+}
+
+article table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1rem;
+}
+
+article th,
+article td {
+    text-align: left;
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+article th {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+article td.num,
+article th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-cta {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--bg-alt);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+}
+
+.post-cta p {
+    margin-bottom: 0;
+}
+
+footer {
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.95rem;
+}

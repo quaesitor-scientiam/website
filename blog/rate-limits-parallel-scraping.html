@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four browsers, one rate limit - Scientiam.AI</title>
+    <meta name="description" content="What broke when I ran four browser sessions against a rate-limited supplier portal, and the three changes that let a multi-day data run finish unattended.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="nav-logo">SCIENTIAM.AI</a>
+            <a href="/#blog" class="nav-back">&larr; All posts</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article>
+            <h1>Four browsers, one rate limit: what broke when I scraped in parallel</h1>
+            <p class="post-meta">November 19, 2026 &middot; Data Automation</p>
+
+            <p>One of my clients sells parts online. Their supplier publishes vehicle fitment data (which part fits which year, make and model) only inside a logged-in dealer portal. There is no API for it. So, with the client's dealer account and their authorization, I automated the portal: search a part number, open the detail view, read the fitment table, repeat for tens of thousands of parts.</p>
+
+            <p>One browser was too slow, so I ran four. That is where the trouble started.</p>
+
+            <h2>The failure</h2>
+
+            <p>On one run all four sessions received HTTP 429 ("too many requests") within about eleven seconds of each other. Each session did the sensible thing in isolation: wait, then retry. But they retried independently, and four uncoordinated retry loops did nothing to calm things down.</p>
+
+            <p>Then it got worse. One session degraded and restarted itself. Restarting means logging in again, and the login page was being throttled too. The login failed, the code concluded the session was dead, and it abandoned the whole brand it was working on, along with that brand's progress. The other three sessions could not log back in either.</p>
+
+            <p>Nothing was actually broken. The site was telling me to slow down, and my code was treating that as a crash.</p>
+
+            <h2>Fix 1: when one session is told to wait, all of them wait</h2>
+
+            <p>The four sessions now share one small piece of state: a "paused until" time. The moment any session confirms a 429, it pushes that time forward. Every session checks it before starting its next part and sleeps until it passes.</p>
+
+            <p>The detail that matters is <em>when</em> the signal goes out. My first version signalled after the session had recovered, minutes later, by which time the others had already piled on. Signalling at detection means the whole fleet backs off before the storm forms. Repeated 429s keep extending the window, so a stubborn limit produces a longer shared pause instead of four overlapping retry loops.</p>
+
+            <h2>Fix 2: a throttled login is not a dead session</h2>
+
+            <p>Logging in after a restart used to get one attempt with a 90-second timeout. Under throttling that is nowhere near enough. Login now retries on the same backoff schedule as everything else: start at 60 seconds, double each time, cap at ten minutes. Only when every attempt fails does the code give up on the session.</p>
+
+            <h2>Fix 3: defer the part, keep the batch</h2>
+
+            <p>If a part still fails after its session has been rebuilt, it goes onto a retry list and the run moves on. When the main pass finishes, the retry list is processed one part at a time, with the other three sessions idle. Parts that fail under concurrent load usually succeed when the site is only handling one request from me.</p>
+
+            <p>This turned the worst outcome from "lose the brand" into "one part is handled later".</p>
+
+            <h2>Pacing so the limit is rarely reached</h2>
+
+            <p>Backoff is the safety net. The better result is not tripping the limit at all. The settings I ended up with:</p>
+
+            <ul>
+                <li>At least 12 seconds between parts in each session, plus a random 0 to 12 seconds so the four sessions do not fall into step.</li>
+                <li>A 90-second pause after every 40 parts, taken <em>before</em> the limit is reached.</li>
+                <li>A 30-second stagger at startup, so four logins do not arrive at once.</li>
+                <li>An extra 45 seconds of quiet after a 429 clears.</li>
+            </ul>
+
+            <p>Each of these makes the run slower on paper. In practice the run finishes sooner, because it no longer spends hours recovering.</p>
+
+            <h2>Keeping it alive for days</h2>
+
+            <p>A full pass takes days, and over that time the browser driver itself dies about once a day. A small watchdog script checks every 15 seconds that the driver and the scraper are both running, and restarts whichever is missing. The scraper records which brand is in progress, so a restart resumes there.</p>
+
+            <p>One lesson came from a run that vanished just after midnight: start the watchdog from the operating system's task scheduler, not from a terminal. A process launched from a terminal session is a child of that session and disappears when the session ends, with no error anywhere.</p>
+
+            <h2>What I would tell someone starting this</h2>
+
+            <ul>
+                <li>Treat a 429 as an instruction, not a fault. Slow down in a coordinated way.</li>
+                <li>Assume every page can be throttled, including login.</li>
+                <li>Make the unit of failure as small as possible. Losing one part is fine. Losing a batch is not.</li>
+                <li>Only automate a portal with the account owner's permission, and at a pace the site can comfortably serve.</li>
+            </ul>
+
+            <div class="post-cta">
+                <p>Have a supplier portal with no API and a weekly copy-and-paste job to match? <a href="/#contact">Tell me about it.</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Scientiam.AI LLC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

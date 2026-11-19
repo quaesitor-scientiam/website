@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why 90% of the catalog "changed" - Scientiam.AI</title>
+    <meta name="description" content="Comparing two runs of supplier catalog data to import only what changed: the method that works, and why a stale baseline makes the result useless.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="nav-logo">SCIENTIAM.AI</a>
+            <a href="/#blog" class="nav-back">&larr; All posts</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article>
+            <h1>Why 90% of the catalog "changed": finding real differences between two data runs</h1>
+            <p class="post-meta">November 19, 2026 &middot; Data Pipelines</p>
+
+            <p>A client re-imports a supplier's vehicle fitment data into their online store: for each part, the list of vehicles it fits. A full import covers tens of thousands of parts and takes a long time. The obvious improvement is to import only the parts whose fitment is new or different since last time.</p>
+
+            <p>Before building that, I tested the idea against two real deliveries. The comparison worked. The answer it gave was that nearly everything had changed. Both of those turned out to be useful.</p>
+
+            <h2>What "changed" has to mean</h2>
+
+            <p>Each part has a table of fitment rows with five columns: year range, make, model, position and notes. Comparing two deliveries byte for byte is hopeless, because plenty differs that does not matter:</p>
+
+            <ul>
+                <li>Rows arrive in a different order.</li>
+                <li>Whitespace and HTML escaping vary.</li>
+                <li>Row IDs are random and regenerated on every run.</li>
+                <li>The delivery is split across numbered files, and the split is different each time.</li>
+                <li>One run quoted a field that the other left unquoted.</li>
+            </ul>
+
+            <p>So the definition I settled on: a part's fitment is the <em>set of its rows</em>, after cleaning each cell. It changed if that set is different.</p>
+
+            <h2>The method</h2>
+
+            <ol>
+                <li>Gather every file in a run into one lookup keyed by part number. Never compare file to file.</li>
+                <li>For each part, pull out the data rows and skip headers and boilerplate.</li>
+                <li>Clean each cell: decode HTML entities, collapse runs of whitespace, trim.</li>
+                <li>Sort the rows and compare.</li>
+            </ol>
+
+            <p>In Python, the core is a few lines. Hashing the sorted rows gives one short value per part that can be stored and compared later:</p>
+
+<pre><code>import hashlib, html, re
+
+def fitment_hash(rows):
+    cleaned = sorted(
+        tuple(re.sub(r"\s+", " ", html.unescape(cell)).strip() for cell in row)
+        for row in rows
+    )
+    return hashlib.sha256(repr(cleaned).encode()).hexdigest()</code></pre>
+
+            <h2>The result</h2>
+
+            <p>The two deliveries were about 22 months apart.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Parts</th><th class="num">Count</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>In both runs</td><td class="num">46,352</td></tr>
+                        <tr><td>Only in the new run</td><td class="num">11,248</td></tr>
+                        <tr><td>Only in the old run</td><td class="num">16,054</td></tr>
+                        <tr><td>In both, with different fitment</td><td class="num">41,813 (90.2%)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>A filter that passes 90% of its input is not much of a filter. My first suspicion was my own code: surely formatting noise was leaking through.</p>
+
+            <h2>Checking the checker</h2>
+
+            <p>The test I used: take vehicles that appear for the same part in both runs, and compare their remaining columns. If the cleaning step were leaving noise behind, those would disagree often. Across thousands of shared rows they disagreed zero times.</p>
+
+            <p>So the differences were real. The new run had about 36% more fitment rows overall, for two reasons. Two more model years had been added. And the older run had under-captured parts with very long fitment lists: one part went from 346 rows to 8,839, and the larger number matched the source.</p>
+
+            <h2>The baseline matters more than the diff</h2>
+
+            <p>The comparison was correct and still not worth shipping as a one-off, because the baseline was too old and partly incomplete. Comparing against it would have meant re-importing almost the whole catalog anyway.</p>
+
+            <p>Change detection pays off between two recent, complete runs. That shifts the work from "write a comparison script" to "make every run leave a baseline behind":</p>
+
+            <ul>
+                <li>Store the hash next to each part, along with the run that last changed it.</li>
+                <li>Stop wiping the previous data at the start of a run. The old rows and hash have to survive long enough to compare against.</li>
+                <li>When a part is fetched, compute the new hash. Same as stored: skip it. Different: replace the rows, update the hash, stamp the run.</li>
+                <li>Build the import file from the parts stamped in this run.</li>
+            </ul>
+
+            <p>Parts that have disappeared from the supplier keep their old rows and are never stamped, so they stay out of the import without special handling.</p>
+
+            <h2>Takeaways</h2>
+
+            <ul>
+                <li>Decide what "changed" means in business terms before comparing anything.</li>
+                <li>Normalize, sort, then compare. Most false differences are ordering and formatting.</li>
+                <li>When the result looks wrong, test the comparison itself before distrusting or trusting it.</li>
+                <li>Measure against real data before building. A short experiment showed which version of this feature was worth paying for.</li>
+            </ul>
+
+            <div class="post-cta">
+                <p>Re-importing an entire catalog every time something small changes? <a href="/#contact">Tell me about it.</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Scientiam.AI LLC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -708,29 +708,49 @@
             text-align: center;
         }
 
-        .blog-coming-soon {
-            max-width: 700px;
+        .blog-posts {
+            max-width: 760px;
             margin: 2.5rem auto 0;
-            padding: 2.5rem;
-            border: 1px solid var(--accent);
-            border-radius: 12px;
-            text-align: center;
+            display: grid;
+            gap: 1.25rem;
         }
 
-        .blog-topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            justify-content: center;
-            margin-top: 1.5rem;
+        .blog-post-card {
+            display: block;
+            padding: 1.5rem 1.75rem;
+            background: white;
+            border: 1px solid #e3e8ee;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            text-decoration: none;
+            color: var(--text);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
-        .blog-topic {
-            padding: 0.4rem 1rem;
-            border: 1px solid var(--accent);
-            border-radius: 20px;
-            color: var(--accent);
-            font-size: 0.9rem;
+        .blog-post-card:hover {
+            box-shadow: 0 8px 24px rgba(10, 37, 64, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .blog-post-meta {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .blog-post-card h3 {
+            font-size: 1.2rem;
+            line-height: 1.35;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
         }
 
         .contact-methods {
@@ -978,15 +998,18 @@
     <section class="blog" id="blog">
         <div class="container">
             <h2 class="fade-in">Blog</h2>
-            <p class="fade-in">Practical guides on data engineering, automation, and AI development. Coming soon.</p>
-            <div class="blog-coming-soon fade-in">
-                <div class="blog-topics">
-                    <span class="blog-topic">Data Pipelines</span>
-                    <span class="blog-topic">Python Automation</span>
-                    <span class="blog-topic">AI Integration</span>
-                    <span class="blog-topic">Computer Vision</span>
-                    <span class="blog-topic">Vibe Coding</span>
-                </div>
+            <p class="fade-in">Practical notes on data engineering and automation, from real client work.</p>
+            <div class="blog-posts fade-in">
+                <a class="blog-post-card" href="blog/rate-limits-parallel-scraping.html">
+                    <span class="blog-post-meta">November 19, 2026 &middot; Data Automation</span>
+                    <h3>Four browsers, one rate limit: what broke when I scraped in parallel</h3>
+                    <p>Four sessions hit a supplier portal's rate limit at once and a multi-day run fell over. The three changes that let it finish unattended.</p>
+                </a>
+                <a class="blog-post-card" href="blog/catalog-change-detection.html">
+                    <span class="blog-post-meta">November 19, 2026 &middot; Data Pipelines</span>
+                    <h3>Why 90% of the catalog "changed": finding real differences between two data runs</h3>
+                    <p>How to compare two deliveries of supplier data so only real changes get imported, and why the baseline matters more than the comparison.</p>
+                </a>
             </div>
         </div>
     </section>
